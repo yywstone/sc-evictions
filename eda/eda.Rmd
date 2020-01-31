@@ -1,0 +1,41 @@
+---
+title: city-evictions-eda
+author: Stone
+date: "`r Sys.Date()`"
+output: 
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Libraries
+library(tidyverse)
+
+# Parameters
+  # City evictions data
+  file_cities <- here::here("data/cities.rds")
+  # City boundaries data
+  file_boundaries <- here::here("data/boundaries.rds")
+  # Joined data
+  file_joined <- here::here("data/joined.rds")
+#===============================================================================
+
+```
+
+## City by eviction number
+```{r}
+file_cities %>% 
+  read_rds() %>% 
+  arrange(desc(evictions))
+```
+
+### City with the highest eviction number
+```{r}
+file_cities %>% 
+  read_rds() %>% 
+  top_n(1, evictions)
+```
